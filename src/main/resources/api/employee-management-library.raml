@@ -1,0 +1,11 @@
+#%RAML 1.0 Library
+types:
+  addEmpReq: !include Datatypes/addEmployeeRequestDataType.raml
+  addEmpRes: !include Datatypes/addEmployeeResponseDataType.raml
+  updateEmpReq: !include Datatypes/updateEmployeeRequestDataType.raml
+  updateEmpRes: !include Datatypes/updateEmployeeResponseDataType.raml
+  getEmpRes: !include Datatypes/getEmployeeResponseDataType.raml
+  deleteEmpRes: !include Datatypes/deleteEmployeeResponseDataType.raml
+traits:
+  transaction-trait: !include Traits/transaction-header-trait.raml
+  getQueryParam-trait: !include Traits/get-queryparam-trait.raml

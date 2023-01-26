@@ -1,0 +1,57 @@
+#%RAML 1.0
+title: EmployeeManagementSystem
+baseUri: https://localhost:8081/emp-sapi/v1
+securitySchemes:
+  empSS: !include clientEnforcement-securityScheme.raml
+securedBy:
+  - empSS
+uses:
+  empLibrary: employee-management-library.raml
+traits:
+  header-trait: !include Traits/transaction-header-trait.raml
+  getParam-trait: !include Traits/get-queryparam-trait.raml
+/employee/add-emp:
+  is: [header-trait]
+  post:
+    body:
+      application/json:
+        type: empLibrary.addEmpReq
+        example: !include Examples/addEmployeeRequest.json
+    responses:
+      201:
+        body:
+          application/json:
+            type: empLibrary.addEmpRes
+            example: !include Examples/addEmployeeResponse.json
+/employee/update-emp:
+  is: [header-trait]
+  put:
+    body:
+      application/json:
+        type: empLibrary.updateEmpReq
+        example: !include Examples/updateEmployeeRequest.json
+    responses:
+      200:
+        body:
+          application/json:
+            type: empLibrary.updateEmpRes
+            example: !include Examples/updateEmployeeResponse.json
+/employee/fetch-emp:
+  is: [header-trait,getParam-trait]
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: empLibrary.getEmpRes
+            example: !include Examples/getEmployeeResponse.json
+/employee/delete-emp/{empId}:
+
+  is: [header-trait]
+  delete:
+    responses:
+      200:
+        body:
+          application/json:
+            type: empLibrary.deleteEmpRes
+            example: !include Examples/deleteEmployeeResponse.json         
